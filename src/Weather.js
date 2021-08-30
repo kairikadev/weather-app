@@ -14,9 +14,11 @@ export default function Weather() {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=e1011e97bf969d1b569c2b62944075b5&units=metric`;
     axios.get(url).then(showValues);
   }
+
   function changeCity(event){
     setCity(event.target.value);
   }
+  
   function showValues(response) {
     let forecast = {
       temperature: ` ${response.data.main.temp} `,
@@ -45,7 +47,7 @@ export default function Weather() {
           <div className="col">
             <input type="submit" value="search" className="btn btn-primary"  />
             
-            <button className="btn btn-success m-2">
+            <button className="btn btn-success m-2" >
                 Current
             </button>
             
