@@ -64,16 +64,16 @@ export default function Weather() {
           <li >Tuesday 10:00</li>
           <li >{forecast.description}</li>
         </ul>
-        <div class="row">
-          <div class="col-6">
+        <div className="row">
+          <div className="col-6">
             <div className="d-flex weather-temperature">
               <img
                 src={forecast.icon}
                 alt={forecast.description}
-                class="float-left"
+                className="float-left"
                
               />
-              <div class="float-left">
+              <div className="">
                 <strong >{Math.round(forecast.temperature)}</strong>
                 <span className="units">
                   <a href="#" >
