@@ -19,10 +19,10 @@ export default function Weather() {
   }
   function showValues(response) {
     let forecast = {
-      temperature: ` ${response.data.main.temp} C`,
+      temperature: ` ${response.data.main.temp} `,
       description: `${response.data.weather[0].description}`,
-      humidity: ` ${response.data.main.humidity}%`,
-      wind: ` ${response.data.wind.speed}Km/h`,
+      humidity: ` ${response.data.main.humidity}`,
+      wind: ` ${response.data.wind.speed}`,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     };
     setForecast(forecast);
@@ -62,13 +62,13 @@ export default function Weather() {
           <div class="col-6">
             <div className="d-flex weather-temperature">
               <img
-                src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                alt="sunny"
+                src={forecast.icon}
+                alt={forecast.description}
                 class="float-left"
                
               />
               <div class="float-left">
-                <strong >{forecast.temperature}</strong>
+                <strong >{Math.round(forecast.temperature)}</strong>
                 <span class="units">
                   <a href="#" >
                     {" "}
