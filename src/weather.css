@@ -8,7 +8,10 @@
     position: relative;
     top: -34px;
   }
-  .weather-temperature a {
+  .units a {
     text-decoration: none;
+  }
+  .city {
+    text-transform: capitalize;
   }
   

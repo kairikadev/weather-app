@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import axios from "axios";
+import "./weather.css";
 
 
 export default function Weather() {
   let [weather, setWeather]= useState({});
   let [city, setCity] = useState("");
+  let [displayCity, setDisplayCity] = useState("");
   
   let[forecast,setForecast]= useState({});
 
@@ -18,6 +20,7 @@ export default function Weather() {
   function changeCity(event){
     setCity(event.target.value);
   }
+
   
   function showValues(response) {
     let forecast = {
@@ -28,6 +31,7 @@ export default function Weather() {
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     };
     setForecast(forecast);
+    setDisplayCity(city);
   };
 
 
@@ -55,7 +59,7 @@ export default function Weather() {
         </div>
       </form>
     </div>
-        <h1 className="city"> {city}</h1>
+        <h1 className="city"> {displayCity}</h1>
         <ul>
           <li >Tuesday 10:00</li>
           <li >{forecast.description}</li>
@@ -71,7 +75,7 @@ export default function Weather() {
               />
               <div class="float-left">
                 <strong >{Math.round(forecast.temperature)}</strong>
-                <span class="units">
+                <span className="units">
                   <a href="#" >
                     {" "}
                     C{" "}
