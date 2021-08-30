@@ -1,13 +1,62 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
-export default function Weather(props) {
+
+export default function Weather() {
+  let [weather, setWeather]= useState({});
+  let [city, setCity] = useState("");
+  
+  let[forecast,setForecast]= useState({});
+
+  function showCity(event){
+    event.preventDefault();
+
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=e1011e97bf969d1b569c2b62944075b5&units=metric`;
+    axios.get(url).then(showValues);
+  }
+  function changeCity(event){
+    setCity(event.target.value);
+  }
+  function showValues(response) {
+    let forecast = {
+      temperature: ` ${response.data.main.temp} C`,
+      description: `${response.data.weather[0].description}`,
+      humidity: ` ${response.data.main.humidity}%`,
+      wind: ` ${response.data.wind.speed}Km/h`,
+      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    };
+    setForecast(forecast);
+  };
+
+
     return (
       <div className="Weather">
-        <h1 className="city"> {props.city}</h1>
+        <div className ="container-sm">
+      <form  className="" onSubmit={showCity}>
+        <div className="row">
+          <div className="col pt-2">
+            <input
+              type="search"
+              placeholder="Enter the city..."
+              className="form-control"
+              onChange={changeCity}
+            />
+          </div>
+          <div className="col">
+            <input type="submit" value="search" className="btn btn-primary"  />
+            
+            <button className="btn btn-success m-2">
+                Current
+            </button>
+            
+          </div>
+        </div>
+      </form>
+    </div>
+        <h1 className="city"> {city}</h1>
         <ul>
-          <li id="date">Tuesday 10:00</li>
-          <li id="description">Sunny</li>
+          <li >Tuesday 10:00</li>
+          <li >{forecast.description}</li>
         </ul>
         <div class="row">
           <div class="col-6">
@@ -16,17 +65,17 @@ export default function Weather(props) {
                 src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
                 alt="sunny"
                 class="float-left"
-                id="icon"
+               
               />
               <div class="float-left">
-                <strong id="temperature">{props.temperature}</strong>
+                <strong >{forecast.temperature}</strong>
                 <span class="units">
-                  <a href="#" id="celsius-link">
+                  <a href="#" >
                     {" "}
                     C{" "}
                   </a>{" "}
                   |
-                  <a href="#" id="fahrenheit-link">
+                  <a href="#" >
                     {" "}
                     F
                   </a>
@@ -34,13 +83,13 @@ export default function Weather(props) {
               </div>
             </div>
           </div>
-          <div class="col-6">
+          <div className="col-6">
             <ul>
               <li>
-                Humidity: <span id="humidity">{props.humidity} </span>%
+                Humidity: <span >{forecast.humidity} </span>%
               </li>
               <li>
-                Wind: <span id="wind">{props.wind}</span>Km/H
+                Wind: <span>{forecast.wind}</span>Km/H
               </li>
             </ul>
           </div>

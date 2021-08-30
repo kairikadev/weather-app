@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Weather from './Weather';
-import Search from "./Search";
+import axios from "axios";
 import Footer from "./Footer";
 
 
@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="weather-app-wrapper">
       <div className="weather-app">
-       <Search /> 
+       
         
-       <Weather  city="Tallinn"/>
+       <Weather />
       
        </div>
        <Footer />
